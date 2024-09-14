@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(116, 229, 255);
+            background-size: cover;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            z-index: 1;
+        }
+
+        .text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted playsinline>
+        <source src="cake.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        // Redirect to index1.html after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'index1.html';
+        }, 6000);
+        
+        // Fade in the text after 0.5 seconds
+        setTimeout(() => {
+            document.querySelector('.text').style.opacity = 1;
+        }, 500);
+    </script>
+</body>
+</html>

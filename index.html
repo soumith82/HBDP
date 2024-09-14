@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+    width: 100%;
+    height: 100vh;
+
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-attachment: fixed; /* Keeps the background image fixed during scroll */
+    background-position: center center; /* Centers the image in the viewport */
+    background-color: rgb(8, 254, 209); /* Fallback color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px; /* Adjust this value as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: Arial, sans-serif;
+    color: #d6336c; /* Matches the color scheme */
+    font-size: 1rem; /* Adjust size as needed */
+    text-align: center;
+    z-index: 1;
+}
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(250, 189, 219, 0.6); /* Semi-transparent pink overlay */
+            z-index: 0;
+        }
+
+        .wrapper {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heading {
+            font-family: 'Pacifico', cursive;
+            color: #0b7e7b;
+            font-size: 3rem; /* Increased font size */
+            margin-bottom: 20px;
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .description {
+            font-family: 'Pacifico', cursive;
+            color: #127d7d;
+            font-size: 1.75rem; /* Increased font size */
+            margin-bottom: 30px;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .sub_timer {
+            flex: 1 1 22%;
+            max-width: 220px;
+            margin: 10px;
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent background for readability */
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .digit {
+            color: #06da90;
+            font-weight: bold;
+            font-size: 4rem; /* Increased font size */
+            padding: 1rem;
+        }
+
+        .digit_name {
+            color: #000;
+            background: #1f9b87;
+            padding: 0.5rem;
+            font-size: 1.2rem; /* Increased font size */
+        }
+
+        @media (max-width: 768px) {
+            .heading {
+                font-size: 2.5rem;
+            }
+
+            .description {
+                font-size: 1.25rem;
+            }
+
+            .digit {
+                font-size: 3rem;
+            }
+
+            .digit_name {
+                font-size: 1rem;
+            }
+
+            .sub_timer {
+                flex: 1 1 45%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .heading {
+                font-size: 2rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .digit {
+                font-size: 2.5rem;
+            }
+
+            .digit_name {
+                font-size: 0.9rem;
+            }
+
+            .sub_timer {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+    <div class="wrapper">
+        <h1 class="heading">HAPPY BIRTHDAY SOON</h1>
+        <p class="description">Happy Birthday!🎂✨ Wishing you a day as amazing as you are, filled with all the happiness and love you deserve!🎉🎈 For you to land second time🎉🎈</p>
+
+        <div class="timer">
+            <div class="sub_timer">
+                <h1 id="day" class="digit">00</h1>
+                <p class="digit_name">Days</p>
+            </div>
+            <div class="sub_timer">
+                <h1 id="hour" class="digit">00</h1>
+                <p class="digit_name">Hours</p>
+            </div>
+            <div class="sub_timer">
+                <h1 id="min" class="digit">00</h1>
+                <p class="digit_name">Minutes</p>
+            </div>
+            <div class="sub_timer">
+                <h1 id="sec" class="digit">00</h1>
+                <p class="digit_name">Seconds</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const targetDate = new Date("Sep 16, 2024 00:00:00").getTime();
+    
+        function startTimer() {
+            const now = new Date().getTime();
+            const timeDifference = targetDate - now;
+    
+            if (timeDifference <= 0) {
+                // Redirect to index3.html if the target date has passed
+                window.location.href = 'index3.html';
+                return; // Exit the function to stop further execution
+            }
+    
+            // Calculate the time components
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    
+            // Pad numbers to ensure two digits
+            document.querySelector("#day").innerHTML = days;
+            document.querySelector("#hour").innerHTML = String(hours).padStart(2, '0');
+            document.querySelector("#min").innerHTML = String(minutes).padStart(2, '0');
+            document.querySelector("#sec").innerHTML = String(seconds).padStart(2, '0');
+        }
+    
+        // Run the timer every second
+        const timerInterval = setInterval(startTimer, 1000);
+    
+        // Check immediately if the target date has already passed
+        startTimer();
+    </script>
+<footer>
+    <p><U>BY: J.V.SOUMITH</U></p>
+</footer>
+
+</body>
+</html>
